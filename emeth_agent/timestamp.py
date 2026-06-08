@@ -7,13 +7,13 @@ autoritaire ; 'issuedAt' n'est que notre assertion de reference."""
 
 import base64
 import hashlib
-import json
 import os
 import subprocess
 import tempfile
 import urllib.request
 from pathlib import Path
 
+import rfc8785
 from asn1crypto import algos, cms, tsp
 
 DEFAULT_TIMEOUT = 15
@@ -21,9 +21,10 @@ DEFAULT_CA_FILE = str(Path(__file__).resolve().parent.parent / "tsa_certs" / "fr
 
 
 def canonical_bytes(payload):
-    """Serialisation canonique (cle triees, compacte) -> bytes deterministes."""
-    return json.dumps(payload, sort_keys=True, separators=(",", ":"),
-                      ensure_ascii=False).encode("utf-8")
+    """Canonicalisation RFC 8785 (JSON Canonicalization Scheme) -> bytes deterministes.
+    Standard et cross-implementable (remplace l'ancien json.dumps sort_keys).
+    NB : les entiers > 2^53 cassent JCS -> le corpus exprime le seuil FLOPs en string."""
+    return rfc8785.dumps(payload)
 
 
 def sha256_hex(payload):

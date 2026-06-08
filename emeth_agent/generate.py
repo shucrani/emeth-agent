@@ -8,7 +8,7 @@ from pathlib import Path
 from . import __version__
 from .classify import classify
 from .corpus import load_corpus
-from .signing import ensure_issuer_key, sign_credential
+from .signing import load_issuer_key, sign_credential
 from .terms import terms_of_use
 from .timestamp import build_timestamp
 
@@ -79,8 +79,8 @@ def generate(subject, declared_inputs, issued_at, filter_name="EU_AI_ACT", tsa_u
 
     credential = dict(payload)
     credential["timestamp"] = build_timestamp(payload, issued_at, tsa_url=tsa_url)
-    # proof = signature emetteur sur (payload + timestamp). Ed25519, cle de dev auto-generee.
-    credential["proof"] = sign_credential(credential, ensure_issuer_key(), issued_at)
+    # proof = signature emetteur sur (payload + timestamp). eddsa-jcs-2022.
+    credential["proof"] = sign_credential(credential, load_issuer_key(), issued_at)
     return credential
 
 

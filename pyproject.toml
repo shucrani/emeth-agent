@@ -10,6 +10,7 @@ keywords = ["eu-ai-act", "verifiable-credentials", "rfc3161", "attestation", "re
 dependencies = [
     "cryptography>=42",
     "asn1crypto>=1.5",
+    "rfc8785>=0.1",
 ]
 
 [project.optional-dependencies]

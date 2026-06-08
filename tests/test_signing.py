@@ -27,8 +27,9 @@ class TestIssuerSignature(unittest.TestCase):
     def test_proof_shape(self):
         proof = _doc()["proof"]
         self.assertEqual(proof["type"], "DataIntegrityProof")
+        self.assertEqual(proof["cryptosuite"], "eddsa-jcs-2022")
         self.assertEqual(proof["proofPurpose"], "assertionMethod")
-        self.assertTrue(proof["proofValue"].startswith("u"))
+        self.assertTrue(proof["proofValue"].startswith("z"))  # multibase base58btc
         self.assertNotIn("status", proof)  # plus de PENDING_SIGNATURE
 
     def test_tamper_on_content_breaks_proof(self):
@@ -47,7 +48,7 @@ class TestIssuerSignature(unittest.TestCase):
 
     def test_ephemeral_roundtrip(self):
         priv = Ed25519PrivateKey.generate()
-        signable = {"a": 1, "b": ["x", "y"], "n": 10000000000000000000000000}
+        signable = {"a": 1, "b": ["x", "y"], "n": "1e25"}
         doc = dict(signable)
         doc["proof"] = sign_credential(signable, priv, ISSUED)
         self.assertTrue(verify_proof(doc, priv.public_key()))

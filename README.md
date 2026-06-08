@@ -45,7 +45,7 @@ Gate labels are in French; the corpus is EU regulation, maintained in French. Th
 
 You do not have to trust me. Each document carries two independent proofs.
 
-Issuer signature (Ed25519): the credential is signed with the issuer key over its canonical bytes. Recompute and verify against the public key; tamper with any field and the signature fails.
+Issuer signature: a W3C Data Integrity proof, cryptosuite `eddsa-jcs-2022` (Ed25519 over RFC 8785 JCS canonicalization). Recompute and verify against the public key; tamper with any field and the signature fails. The construction is round-trip tested here, not yet cross-verified against a third-party Data Integrity verifier.
 
 Timestamp (RFC 3161): the document hash is sealed by a Time-Stamp Authority, and the token verifies against the TSA root.
 
@@ -64,7 +64,7 @@ A small corpus of regulatory gates (`corpus/eu_ai_act.json`), each an individual
 - Not legal advice. States position, not compliance.
 - The corpus is fact-checked against the regulation text but not legally certified. Scope rules that embed interpretation are flagged for a lawyer, not asserted.
 - Several effective dates are provisional (Digital Omnibus, not yet in the Official Journal) and marked as such in the corpus.
-- The bundled issuer key and the freetsa timestamp root are development defaults. Production needs a secured issuer key published at the `verificationMethod` URL, and an authoritative Time-Stamp Authority.
+- The issuer key defaults to an auto-generated development key. For production, set `EMETH_ISSUER_KEY` to an encrypted PEM (with `EMETH_ISSUER_KEY_PASSWORD`) and publish its public key at the `verificationMethod` URL. The freetsa timestamp root is a development default; production should use an authoritative Time-Stamp Authority.
 
 ## Tests
 

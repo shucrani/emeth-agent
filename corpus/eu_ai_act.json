@@ -2,7 +2,7 @@
   "filter": "EU_AI_ACT",
   "snapshot_id": "eu-ai-act-2026-06-08",
   "snapshot_date": "2026-06-08",
-  "note": "Corpus FACT-CHECKE contre le texte (audit 08/06, sources citees par gate) MAIS non certifie juridiquement : les regles de scope restent soumises a la revue d'un juriste qualifie avant tout usage non-test (vanne humaine). Dates Omnibus = PROVISOIRES (accord 7 mai 2026, pas encore au JO) ; sous le reglement en vigueur les dates restent 2026-08-02.",
+  "note": "Corpus FACT-CHECKE contre le texte (audit 08/06, sources citees par gate). Non certifie juridiquement, et n'affirme JAMAIS de conclusion legale : l'interpretation est routee a la declaration du sujet, jamais decidee par l'outil. La maintenance requise = veracite factuelle (fact-checking des dates/roles/seuils), pas une certification ; une relecture juriste reste un plus optionnel, pas un prerequis (le refus delimitatif + les disclaimers portent la defendabilite). Dates Omnibus = PROVISOIRES (accord 7 mai 2026, pas encore au JO) ; sous le reglement en vigueur les dates restent 2026-08-02.",
   "gates": [
     {
       "provision": "Art. 50(1)",
@@ -60,7 +60,7 @@
       "scope_rule": {
         "requires": [
           {"key": "is_gpai_provider", "op": "eq", "value": "yes"},
-          {"key": "training_compute_flops", "op": "gt", "value": 10000000000000000000000000}
+          {"key": "training_compute_flops", "op": "gt", "value": "1e25"}
         ]
       }
     },
