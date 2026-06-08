@@ -1,0 +1,16 @@
+{
+  "subject": {
+    "name": "TalentScan HRtech SARL",
+    "identifier": "FR 12345678900012",
+    "jurisdiction": "FR"
+  },
+  "declared_inputs": {
+    "provides_ai_interacting_with_persons": "no",
+    "provides_generative_ai_system": "no",
+    "is_gpai_provider": "no",
+    "deploys_emotion_recognition_or_biometric_categorisation": "yes",
+    "deploys_deepfake_or_ai_public_text": "no",
+    "annex_iii_use_case": "employment_workers_management"
+  },
+  "_note": "ICP cible : deployeur HR-tech. Analyse des emotions candidats -> 50(3) IN_SCOPE. Domaine emploi -> Annexe III IN_SCOPE (eval 6(3) requise, PAS haut-risque auto). Attendu : class IN_SCOPE:2 / UNDETERMINED:0."
+}

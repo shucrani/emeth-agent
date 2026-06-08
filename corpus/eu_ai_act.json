@@ -1,0 +1,131 @@
+{
+  "filter": "EU_AI_ACT",
+  "snapshot_id": "eu-ai-act-2026-06-08",
+  "snapshot_date": "2026-06-08",
+  "note": "Corpus FACT-CHECKE contre le texte (audit 08/06, sources citees par gate) MAIS non certifie juridiquement : les regles de scope restent soumises a la revue d'un juriste qualifie avant tout usage non-test (vanne humaine). Dates Omnibus = PROVISOIRES (accord 7 mai 2026, pas encore au JO) ; sous le reglement en vigueur les dates restent 2026-08-02.",
+  "gates": [
+    {
+      "provision": "Art. 50(1)",
+      "gate": "Transparence : le systeme informe qu'on interagit avec une IA",
+      "role": "provider",
+      "effective_date": "2026-08-02",
+      "provisional": false,
+      "veracity_note": "Art. 50(1) = obligation du FOURNISSEUR (concevoir le systeme pour informer), PAS du deployeur. Pour un public deployeur, les transparences pertinentes sont 50(3) (reconnaissance d'emotions / categorisation biometrique) et 50(4) (deepfakes / textes d'interet public) -- GATES A AJOUTER, decision de scope Lamar.",
+      "source": {
+        "title": "Regulation (EU) 2024/1689, Article 50(1)",
+        "url": "https://artificialintelligenceact.eu/article/50/",
+        "retrieved_at": "2026-06-08"
+      },
+      "scope_rule": {
+        "requires": [
+          {"key": "provides_ai_interacting_with_persons", "op": "eq", "value": "yes"}
+        ]
+      }
+    },
+    {
+      "provision": "Art. 50(2)",
+      "gate": "Marquage machine-readable du contenu synthetique (audio/image/video/texte)",
+      "role": "provider",
+      "effective_date": "2026-08-02",
+      "provisional": false,
+      "grace": {
+        "until": "2026-12-02",
+        "applies_to": "systemes deja sur le marche AVANT le 2026-08-02 (legacy) uniquement ; un systeme mis sur le marche a partir du 2026-08-02 n'a AUCUNE grace",
+        "source": "Digital Omnibus (compromis trilogue ~4 mois ; PROVISOIRE, pas encore au JO)",
+        "provisional": true
+      },
+      "source": {
+        "title": "Regulation (EU) 2024/1689, Article 50(2)",
+        "url": "https://artificialintelligenceact.eu/article/50/",
+        "retrieved_at": "2026-06-08"
+      },
+      "scope_rule": {
+        "requires": [
+          {"key": "provides_generative_ai_system", "op": "eq", "value": "yes"}
+        ]
+      }
+    },
+    {
+      "provision": "Art. 51 + Art. 3(65)",
+      "gate": "GPAI a risque systemique (presomption par seuil de calcul)",
+      "role": "provider (GPAI)",
+      "effective_date": "2025-08-02",
+      "provisional": false,
+      "veracity_note": "Le seuil 10^25 FLOPs (Art. 51(2)) est une PRESOMPTION, et strict (> et non >=). Le risque systemique existe AUSSI via 51(1)(a) capacites a fort impact (qualitatif) et 51(1)(b) decision de la Commission (Annexe XIII) : cette regle FLOPs-only produit donc des faux negatifs. Seuil amendable par acte delegue (51(3)). Realiste : un solo/PME n'est quasi jamais fournisseur GPAI -- gate inerte pour la cible, a conserver ou retirer = decision Lamar.",
+      "source": {
+        "title": "Regulation (EU) 2024/1689, Article 51(2) (presomption si calcul > 10^25 FLOPs)",
+        "url": "https://artificialintelligenceact.eu/article/51/",
+        "retrieved_at": "2026-06-08"
+      },
+      "scope_rule": {
+        "requires": [
+          {"key": "is_gpai_provider", "op": "eq", "value": "yes"},
+          {"key": "training_compute_flops", "op": "gt", "value": 10000000000000000000000000}
+        ]
+      }
+    },
+    {
+      "provision": "Annexe III",
+      "gate": "Domaine Annexe III (8 domaines) -- evaluation Art. 6(3) requise, PAS haut-risque automatique",
+      "effective_date": "2027-12-02",
+      "provisional": true,
+      "original_date": "2026-08-02 sous le reglement en vigueur ; 2027-12-02 = report Omnibus PROVISOIRE (pas encore au JO)",
+      "assessment": "INTERPRETATION = VANNE HUMAINE (juriste). Appartenir a un domaine Annexe III est NECESSAIRE mais NON SUFFISANT (Art. 6(2)). Art. 6(3) exempte les systemes sans risque significatif (tache procedurale etroite ; amelioration d'un resultat humain ; detection de patterns sans remplacer la revue humaine ; tache preparatoire). Le PROFILAGE de personnes reste TOUJOURS haut-risque. L'agent n'affirme jamais 'haut-risque' : IN_SCOPE ici = 'domaine Annexe III applicable, evaluation 6(3) requise'.",
+      "source": {
+        "title": "Regulation (EU) 2024/1689, Annexe III + Art. 6(2)/6(3)",
+        "url": "https://artificialintelligenceact.eu/annex/3/",
+        "retrieved_at": "2026-06-08"
+      },
+      "scope_rule": {
+        "requires": [
+          {"key": "annex_iii_use_case", "op": "in", "value": [
+            "biometrics",
+            "critical_infrastructure",
+            "education_vocational_training",
+            "employment_workers_management",
+            "essential_services_and_benefits",
+            "law_enforcement",
+            "migration_asylum_border",
+            "justice_and_democratic_processes"
+          ]}
+        ]
+      }
+    },
+    {
+      "provision": "Art. 50(3)",
+      "gate": "Transparence : informer les personnes exposees a la reconnaissance d'emotions ou a la categorisation biometrique",
+      "role": "deployer",
+      "effective_date": "2026-08-02",
+      "provisional": false,
+      "veracity_note": "Obligation du DEPLOYEUR. Cle t0 combinee (reconnaissance d'emotions OU categorisation biometrique) ; split atomique + logique OR = raffinement. Exception : usages penaux autorises par la loi = interpretation, vanne juriste.",
+      "source": {
+        "title": "Regulation (EU) 2024/1689, Article 50(3)",
+        "url": "https://artificialintelligenceact.eu/article/50/",
+        "retrieved_at": "2026-06-08"
+      },
+      "scope_rule": {
+        "requires": [
+          {"key": "deploys_emotion_recognition_or_biometric_categorisation", "op": "eq", "value": "yes"}
+        ]
+      }
+    },
+    {
+      "provision": "Art. 50(4)",
+      "gate": "Transparence : divulguer les deepfakes et les textes IA publies sur des sujets d'interet public",
+      "role": "deployer",
+      "effective_date": "2026-08-02",
+      "provisional": false,
+      "veracity_note": "Obligation du DEPLOYEUR. Cle t0 combinee (deepfake OU texte d'interet public genere par IA). Exceptions (usage artistique/satirique ; revue editoriale humaine ; usage penal autorise) = interpretation, vanne juriste.",
+      "source": {
+        "title": "Regulation (EU) 2024/1689, Article 50(4)",
+        "url": "https://artificialintelligenceact.eu/article/50/",
+        "retrieved_at": "2026-06-08"
+      },
+      "scope_rule": {
+        "requires": [
+          {"key": "deploys_deepfake_or_ai_public_text", "op": "eq", "value": "yes"}
+        ]
+      }
+    }
+  ]
+}

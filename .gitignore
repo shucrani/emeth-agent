@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.venv/
+venv/
+
+# macOS
+.DS_Store
+
+# Generated attestation documents
+out/
+
+# Issuer key material (generated locally; NEVER commit)
+keys/

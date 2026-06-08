@@ -1,0 +1,15 @@
+{
+  "subject": {
+    "name": "ACME Test SA",
+    "identifier": "BE 0123.456.789",
+    "jurisdiction": "BE"
+  },
+  "declared_inputs": {
+    "provides_ai_interacting_with_persons": "yes",
+    "provides_generative_ai_system": "yes",
+    "is_gpai_provider": "no",
+    "deploys_emotion_recognition_or_biometric_categorisation": "no",
+    "deploys_deepfake_or_ai_public_text": "no"
+  },
+  "_note": "Cle 50(1) corrigee en role fournisseur (provides_). annex_iii_use_case volontairement absent -> Annexe III ressort UNDETERMINED (evaluation 6(3) requise). is_gpai_provider=no -> Art.51 omis."
+}
